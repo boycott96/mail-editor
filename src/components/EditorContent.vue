@@ -1,32 +1,44 @@
 <template>
-  <div class="edit-content"></div>
+  <div class="editor-wrapper">
+    <div ref="editor" class="editor" contenteditable @input="onInput"></div>
+  </div>
 </template>
 
 <script setup>
-const props = defineProps({
-  modelValue: {
-    type: String,
-    default: "",
-  },
-  preserveOriginalStyles: {
-    type: Boolean,
-    default: false,
-  },
+import { ref, onMounted } from "vue";
+import { EditorUtils } from "@/editor/editor-utils";
+import { serializeMailHtml } from "@/editor/mail-serializer";
+
+const editor = ref(null);
+let utils = null;
+
+onMounted(() => {
+  utils = new EditorUtils(editor.value);
+});
+
+function onInput() {
+  // 只做数据同步，不修 DOM
+}
+
+function setEditorContent(html) {
+  editor.value.innerHTML = html;
+}
+
+function getSendHtml() {
+  return serializeMailHtml(editor.value);
+}
+
+defineExpose({
+  setEditorContent,
+  getSendHtml,
+  utils,
 });
 </script>
 
-<style lang="scss" scoped>
-.editor-content {
-  flex: 1;
-  padding: 16px;
-  border: none;
+<style>
+.editor {
+  min-height: 200px;
   outline: none;
-  font-family: inherit;
-  font-size: 14px;
-  line-height: 1.5;
-  min-height: 400px;
-  overflow-y: auto;
-  white-space: pre-wrap; /* 保留换行和空格 */
-  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 </style>
