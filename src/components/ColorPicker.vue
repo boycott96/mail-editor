@@ -1,29 +1,44 @@
 <template>
-  <div class="color-picker">
-    <!-- 默认颜色选项 -->
-    <div
-      v-if="showDefaultColor"
-      class="default-color-item"
-      @click="handleColorSelect(defaultColor)"
-    >
-      <span class="color-label">默认颜色</span>
+  <div class="color-select">
+    <div class="color-btn">
+      <svg-icon :name="icon" :color="modelValue" />
     </div>
-
-    <!-- 颜色网格 -->
-    <div class="color-grid">
-      <div
-        v-for="(color, index) in MAIL_COLOR_LIST"
-        :key="index"
-        class="color-item"
-        :class="{ selected: isSelectedColor(color) }"
-        @click="handleColorSelect(rgbToHex(color))"
-      >
-        <div
-          class="color-swatch"
-          :style="{ backgroundColor: rgbToHex(color) }"
-        ></div>
+    <el-dropdown trigger="click">
+      <div class="select-btn">
+        <svg-icon
+          class="mini-icon"
+          name="arrow-down"
+          @click="() => emit('change', modelValue)"
+        />
       </div>
-    </div>
+      <template #dropdown>
+        <div class="color-picker">
+          <!-- 默认颜色选项 -->
+          <div
+            class="default-color-item"
+            @click="handleColorSelect(defaultColor)"
+          >
+            <span class="color-label">默认颜色</span>
+          </div>
+
+          <!-- 颜色网格 -->
+          <div class="color-grid">
+            <div
+              v-for="(color, index) in MAIL_COLOR_LIST"
+              :key="index"
+              class="color-item"
+              :class="{ selected: isSelectedColor(color) }"
+              @click="handleColorSelect(rgbToHex(color))"
+            >
+              <div
+                class="color-swatch"
+                :style="{ backgroundColor: rgbToHex(color) }"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </el-dropdown>
   </div>
 </template>
 
@@ -38,13 +53,13 @@ const props = defineProps({
     type: String,
     default: DEFAULT_TEXT_COLOR,
   },
-  showDefaultColor: {
-    type: Boolean,
-    default: true,
-  },
   defaultColor: {
     type: String,
     default: DEFAULT_TEXT_COLOR,
+  },
+  icon: {
+    type: String,
+    default: "text",
   },
 });
 
@@ -72,6 +87,39 @@ const handleColorSelect = (color) => {
 </script>
 
 <style lang="scss" scoped>
+.color-select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .color-btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  &:hover {
+    background-color: #e8eaed;
+    .color-btn {
+      &:hover {
+        background-color: #dce0e6;
+      }
+    }
+    .select-btn {
+      &:hover {
+        background-color: #dce0e6;
+      }
+    }
+  }
+  .select-btn {
+    height: 28px;
+    padding: 0 2px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+}
 .color-picker {
   padding: 12px;
   max-width: 320px;

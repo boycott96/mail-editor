@@ -131,4 +131,11 @@ export const ALIGN_LIST = [
   { label: "两端对齐", value: "justify" },
 ];
 
-export const LINE_HEIGHT_LIST = ["1.0", "1.15", "1.3", "1.5", "2.0", "3.0"];
+export const LINE_HEIGHT_LIST = [
+  { label: "1.0", value: "1.0" },
+  { label: "1.15", value: "1.15" },
+  { label: "1.3", value: "1.3" },
+  { label: "1.5", value: "1.5" },
+  { label: "2.0", value: "2.0" },
+  { label: "3.0", value: "3.0" },
+];

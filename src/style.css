@@ -1,17 +1,27 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, system-ui, "PingFang SC",
+    "Microsoft YaHei UI", "Microsoft YaHei", "Source Han Sans CN",
+    "Noto Sans CJK SC", sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
 
-  font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-body, #app {
+body,
+#app {
   margin: 0;
   min-height: 100vh;
+}
+.small-icon {
+  width: 12px;
+  height: 12px;
+}
+.mini-icon {
+  width: 10px;
+  height: 10px;
 }
