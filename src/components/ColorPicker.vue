@@ -1,6 +1,6 @@
 <template>
   <div class="color-select">
-    <div class="color-btn">
+    <div class="color-btn" @click="() => emit('change', modelValue)">
       <svg-icon :name="icon" :color="modelValue" />
     </div>
     <el-dropdown trigger="click">
